@@ -1,0 +1,99 @@
+#!/usr/bin/env php
+<?php
+/**
+ * This file is part of monda-worker.
+ *
+ * @contact  mondagroup_php@163.com
+ */
+
+use framework\server\GlobalDataServer;
+use framework\server\HttpServer;
+use Workerman\Connection\TcpConnection;
+use Workerman\Worker;
+
+if (! extension_loaded('pcntl')) {
+    exit("Please install pcntl extension. See http://doc3.workerman.net/appendices/install-extension.html\n");
+}
+
+if (! extension_loaded('posix')) {
+    exit("Please install posix extension. See http://doc3.workerman.net/appendices/install-extension.html\n");
+}
+
+require_once __DIR__ . '/define.php';
+
+//opcache加速
+Worker::$onMasterReload = function () {
+    if (function_exists('opcache_get_status') && function_exists('opcache_invalidate')) {
+        if ($status = opcache_get_status()) {
+            if (isset($status['scripts']) && $scripts = $status['scripts']) {
+                foreach (array_keys($scripts) as $file) {
+                    opcache_invalidate($file, true);
+                }
+            }
+        }
+    }
+};
+//加载系统配置文件
+$serverConfig = config('server');
+$rpcConfig = config('rpc');
+Worker::$pidFile = $serverConfig['pid_file'];
+Worker::$stdoutFile = $serverConfig['stdout_file'];
+TcpConnection::$defaultMaxPackageSize = $config['max_package_size'] ?? 10 * 1024 * 1024;
+
+//启动http
+if (isset($serverConfig['http']) && $serverConfig['http']['enable']) {
+    $httpWorker = new HttpServer($serverConfig['http']);
+}
+
+//globalData
+if (isset($serverConfig['global_data']) && $serverConfig['global_data']['enable']) {
+    $globalServer = new GlobalDataServer($serverConfig['global_data']['ip'] ?? '127.0.0.1', $serverConfig['global_data']['port'] ?? 2207);
+}
+
+//进程
+foreach (config('process', []) as $processName => $processConfig) {
+    if (! (isset($processConfig['enable']) && $processConfig['enable'])) {
+        continue;
+    }
+    $worker = new Worker($processConfig['listen'] ?? null, $processConfig['context'] ?? []);
+    $worker->name = $processName;
+    $propertyMap = ['count', 'user', 'group', 'reloadable', 'reusePort', 'transport', 'protocol'];
+    foreach ($propertyMap ?? [] as $property) {
+        if (isset($processConfig[$property])) {
+            $worker->{$property} = $processConfig[$property];
+        }
+    }
+    $worker->onWorkerStart = function ($worker) use ($processConfig) {
+        //加载启动文件
+        $bootStrapFiles = config('bootstrap');
+        foreach ($bootStrapFiles as $className) {
+            $className::start($worker);
+        }
+        if (isset($processConfig['services'])) {
+            foreach ($processConfig['services'] ?? [] as $server) {
+                if (! class_exists($server['handler'])) {
+                    print_error("process error: class {$processConfig['handler']} not exists");
+                    continue;
+                }
+                $listen = new Worker($server['listen'] ?? null, $server['context'] ?? []);
+                $listen->reusePort = true;
+                if (isset($server['listen'])) {
+                    print_ok("listen: {$server['listen']}");
+                }
+                $class = container()->make($server['handler'], $server['constructor'] ?? []);
+                worker_bind($listen, $class);
+                $listen->listen();
+            }
+        }
+        //执行handler
+        if (isset($processConfig['handler'])) {
+            if (! class_exists($processConfig['handler'])) {
+                print_error("process error: class {$processConfig['handler']} not exists");
+                return;
+            }
+            $class = container()->make($processConfig['handler'], $processConfig['constructor'] ?? []);
+            worker_bind($worker, $class);
+        }
+    };
+}
+Worker::runAll();

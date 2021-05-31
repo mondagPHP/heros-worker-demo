@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php
+/**
+ * This file is part of monda-worker.
+ *
+ * @contact  mondagroup_php@163.com
+ *
+ */
+use framework\App;
+use framework\command\Manager;
+use framework\command\Parser;
+
+require_once __DIR__ . '/bin/define.php';
+//应用基本配置
+$appConfig = \config('app');
+if (isset($appConfig['default_timezone'])) {
+    date_default_timezone_set($appConfig['default_timezone']);
+}
+//启动
+$bootStrapFiles = config('bootstrap');
+$work = new \Workerman\Worker();
+foreach ($bootStrapFiles as $className) {
+    // @var Bootstrap $className
+    $className::start($work);
+}
+try {
+    App::init();
+    $commandManager = new Manager();
+    $commandManager->scans(\config('command'));
+    [$command, $input] = Parser::parse($argv);
+    Manager::exec($command, $input);
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+    echo '----------------trace:-----------------------' . PHP_EOL;
+    var_dump($e->getTraceAsString());
+}

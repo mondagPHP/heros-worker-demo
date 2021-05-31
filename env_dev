@@ -1,0 +1,25 @@
+#Development environment configuration
+#app
+app_name=employee-api
+app_debug=true
+
+#server
+server_listen=http://127.0.0.1:8080
+server_process_count=1
+server_max_request=10000
+
+#database
+db_default_driver=mysql
+db_default_host=127.0.0.1
+db_default_port=3306
+db_default_database=test
+db_default_username=root
+db_default_password=12345678
+db_default_charset=utf8mb4
+db_default_collation=utf8mb4_unicode_ci
+
+#redis
+redis_host=127.0.0.1
+redis_password=null
+redis_port=6379
+redis_db=1

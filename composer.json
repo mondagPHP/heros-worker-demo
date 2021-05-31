@@ -1,0 +1,38 @@
+{
+  "name": "mondagroup/heros-worker-demo",
+  "type": "project",
+  "keywords": [
+    "high performance",
+    "http service",
+    "web app"
+  ],
+  "description": "heros-worker framework app demo",
+  "authors": [
+    {
+      "name": "mondagroup",
+      "email": "mondagroup@pvc123.com"
+    }
+  ],
+  "require": {
+    "mondagroup/heros-worker": "@dev"
+  },
+  "require-dev": {
+    "zircote/swagger-php": "^3.1"
+  },
+  "suggest": {
+    "ext-event": "For better performance. "
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "app/",
+      "script\\": "script/"
+    },
+    "files": [
+      "./app/functions.php"
+    ]
+  },
+  "scripts": {
+    "cs-fix": "composer dump -o && php-cs-fixer fix $1",
+    "post-install-cmd": "script\\Installer::install"
+  }
+}
