@@ -31,6 +31,12 @@
       "./app/functions.php"
     ]
   },
+  "repositories": {
+    "packagist": {
+        "type": "composer",
+        "url": "https://packagist.phpcomposer.com"
+    }
+  },
   "scripts": {
     "cs-fix": "composer dump -o && php-cs-fixer fix $1",
     "post-install-cmd": "script\\Installer::install"

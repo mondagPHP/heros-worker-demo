@@ -4,6 +4,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && apk --update add ca-certificates \
     # Packages
     tini \
+    git \
+    zip \
+    curl \
     php7 \
     php7-amqp \
     php7-dev \
@@ -28,7 +31,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     php7-pdo_pgsql \
     php7-phar \
     php7-posix \
-    php7-soap \
     php7-session \
     php7-xml \
     php7-xsl \
@@ -37,7 +39,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     php7-dom \
     php7-redis \
     php7-fpm \
-    php7-sodium \
     php7-tokenizer \
     php7-xmlwriter \
     php7-simplexml \
@@ -49,6 +50,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 VOLUME ["/var/www/heros-worker-demo"]
 WORKDIR /var/www/heros-worker-demo
 
-CMD php bin/start start
+CMD php composer.phar install && php bin/start start
 
 EXPOSE 8080
