@@ -1,6 +1,6 @@
 #Development environment configuration
 #app
-app_name=employee-api
+app_name=heros-worker-demo
 app_debug=true
 
 #server

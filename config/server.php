@@ -15,8 +15,8 @@ return [
     //http 进程
     'http' => [
         'enable' => true,
-        'listen' => env('SERVER_LISTEN', 'http://127.0.0.1:8081'),
-        'transport' => env('SERVER_TRANSPORT', 'tcp'),
+        'listen' => env('server_listen', 'http://127.0.0.1:8081'),
+        'transport' => env('server_transport', 'tcp'),
         'context' => [],
         'name' => env('app_name', 'heros-worker-demo'),
         'count' => env('server_process_count', cpu_count() / 2),
