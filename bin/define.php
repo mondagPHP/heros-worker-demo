@@ -22,6 +22,7 @@ $envFile = parse_ini_file(BASE_PATH . '/.env');
 if (isset($envFile['env'])) {
     $env = $envFile['env'];
 }
+define('ENV', $env);
 //加载配置文件
 Dotenv::create(BASE_PATH, "env_{$env}")->load();
 //加载配置文件文件

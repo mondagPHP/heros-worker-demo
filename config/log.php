@@ -12,7 +12,8 @@ return [
                 'class' => Monolog\Handler\RotatingFileHandler::class,
                 'constructor' => [
                     runtime_path() . '/logs/worker.log',
-                    Monolog\Logger::DEBUG,
+                    0,
+                    ENV === 'prod' ? Monolog\Logger::DEBUG : Monolog\Logger::INFO,
                 ],
                 'formatter' => [
                     'class' => Monolog\Formatter\LineFormatter::class,
