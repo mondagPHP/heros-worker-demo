@@ -13,7 +13,7 @@ return [
                 'constructor' => [
                     runtime_path() . '/logs/worker.log',
                     0,
-                    ENV === 'prod' ? Monolog\Logger::DEBUG : Monolog\Logger::INFO,
+                    ENV === 'dev' ? Monolog\Logger::DEBUG : Monolog\Logger::INFO,
                 ],
                 'formatter' => [
                     'class' => Monolog\Formatter\LineFormatter::class,
