@@ -11,14 +11,7 @@ use framework\server\HttpServer;
 use Workerman\Connection\TcpConnection;
 use Workerman\Worker;
 
-if (! extension_loaded('pcntl')) {
-    exit("Please install pcntl extension. See http://doc3.workerman.net/appendices/install-extension.html\n");
-}
-
-if (! extension_loaded('posix')) {
-    exit("Please install posix extension. See http://doc3.workerman.net/appendices/install-extension.html\n");
-}
-
+require_once __DIR__ .'/check.php';
 require_once __DIR__ . '/define.php';
 
 //opcache加速
@@ -35,7 +28,6 @@ Worker::$onMasterReload = function () {
 };
 //加载系统配置文件
 $serverConfig = config('server');
-$rpcConfig = config('rpc');
 Worker::$pidFile = $serverConfig['pid_file'];
 Worker::$stdoutFile = $serverConfig['stdout_file'];
 TcpConnection::$defaultMaxPackageSize = $config['max_package_size'] ?? 10 * 1024 * 1024;
