@@ -6,6 +6,7 @@
  * @contact  mondagroup_php@163.com
  */
 
+use framework\file\FileUtils;
 use framework\server\GlobalDataServer;
 use framework\server\HttpServer;
 use Workerman\Connection\TcpConnection;
@@ -28,6 +29,13 @@ Worker::$onMasterReload = function () {
 };
 //加载系统配置文件
 $serverConfig = config('server');
+
+//创建PidDir
+$pidDir = dirname($serverConfig['pid_file']);
+if (!file_exists($pidDir)) {
+    FileUtils::makeFileDirs($pidDir);
+}
+
 Worker::$pidFile = $serverConfig['pid_file'];
 Worker::$stdoutFile = $serverConfig['stdout_file'];
 TcpConnection::$defaultMaxPackageSize = $config['max_package_size'] ?? 10 * 1024 * 1024;
