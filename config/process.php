@@ -6,6 +6,7 @@
  *
  */
 use app\process\CrontabTask;
+use app\process\InotifyFileMonitor;
 use framework\queue\redis\proccess\Consumer;
 
 return [
@@ -22,5 +23,19 @@ return [
             // 消费者类目录
             'consumer_dir' => app_path() . '/queue'
         ]
-    ]
+    ],
+    'bl-file-monitor' => [
+       'enable' => ENV === 'dev',
+       'handler' => InotifyFileMonitor::class,
+       'constructor' => [
+           // 监控这些目录
+           'monitor_dir' => [
+               app_path(), config_path(), BASE_PATH . '/view',
+           ],
+           // 监控这些后缀的文件
+           'monitor_extensions' => [
+               'php', 'html',
+           ],
+       ],
+   ],
 ];
