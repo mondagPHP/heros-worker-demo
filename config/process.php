@@ -6,7 +6,7 @@
  *
  */
 use app\process\CrontabTask;
-use app\process\InotifyFileMonitor;
+use app\process\FileMonitor;
 use framework\queue\redis\proccess\Consumer;
 
 return [
@@ -26,7 +26,7 @@ return [
     ],
     'bl-file-monitor' => [
        'enable' => ENV === 'dev',
-       'handler' => InotifyFileMonitor::class,
+       'handler' => FileMonitor::class,
        'constructor' => [
            // 监控这些目录
            'monitor_dir' => [
