@@ -11,7 +11,7 @@ use Workerman\Worker;
 
 /**
  * Inotify version
- * 
+ *
  * Class FileMonitor.
  */
 class InotifyFileMonitor
@@ -47,7 +47,6 @@ class InotifyFileMonitor
         $fd = inotify_init();
 
         while (true) {
-
             foreach ($this->paths ?? [] as $path) {
                 if (! is_dir($path)) {
                     if (! is_file($path)) {
