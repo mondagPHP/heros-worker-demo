@@ -19,7 +19,8 @@
   "require-dev": {
     "zircote/swagger-php": "^3.1",
     "phpstan/phpstan": "1.0.0",
-    "friendsofphp/php-cs-fixer": "^2.19"
+    "friendsofphp/php-cs-fixer": "^2.19",
+    "phpunit/phpunit": "^7.0"
   },
   "suggest": {
     "ext-event": "For better performance. "
@@ -33,9 +34,15 @@
       "./app/functions.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\": "tests/"
+    }
+  },
   "scripts": {
     "cs-fix": "composer dump -o && php-cs-fixer fix $1",
     "post-install-cmd": "script\\Installer::install",
-    "analyse": "./vendor/bin/phpstan analyse $1"
+    "analyse": "./vendor/bin/phpstan analyse $1",
+    "test": "./vendor/bin/phpunit"
   }
 }

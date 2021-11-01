@@ -66,12 +66,12 @@ class InotifyFileMonitor
                     }
                 }
             }
-    
+
             inotify_read($fd);
-    
+
             posix_kill(posix_getppid(), SIGUSR1);
         }
-        
+
         fclose($fd);
 
         pcntl_wait($status);
