@@ -1,37 +1,40 @@
 <?php
 /**
- * 检测函数
+ * This file is part of monda-worker.
+ *
+ * @contact  mondagroup_php@163.com
+ *
  */
-if (!extension_loaded('pcntl')) {
+if (! extension_loaded('pcntl')) {
     exit("Please install pcntl extension. See http://doc3.workerman.net/appendices/install-extension.html\n");
 }
-if (!extension_loaded('posix')) {
+if (! extension_loaded('posix')) {
     exit("Please install posix extension. See https://doc3.workerman.net/appendices/install-extension.html\n");
 }
-$checkFuncMap = array(
-    "stream_socket_server",
-    "stream_socket_client",
-    "pcntl_signal_dispatch",
-    "pcntl_signal",
-    "pcntl_alarm",
-    "pcntl_fork",
-    "posix_getuid",
-    "posix_getpwuid",
-    "posix_kill",
-    "posix_setsid",
-    "posix_getpid",
-    "posix_getpwnam",
-    "posix_getgrnam",
-    "posix_getgid",
-    "posix_setgid",
-    "posix_initgroups",
-    "posix_setuid",
-    "posix_isatty",
-);
+$checkFuncMap = [
+    'stream_socket_server',
+    'stream_socket_client',
+    'pcntl_signal_dispatch',
+    'pcntl_signal',
+    'pcntl_alarm',
+    'pcntl_fork',
+    'posix_getuid',
+    'posix_getpwuid',
+    'posix_kill',
+    'posix_setsid',
+    'posix_getpid',
+    'posix_getpwnam',
+    'posix_getgrnam',
+    'posix_getgid',
+    'posix_setgid',
+    'posix_initgroups',
+    'posix_setuid',
+    'posix_isatty',
+];
 
 // 获取php.ini中设置的禁用函数
-if ($disableFuncString = ini_get("disable_functions")) {
-    $disableFuncMap = array_flip(explode(",", $disableFuncString));
+if ($disableFuncString = ini_get('disable_functions')) {
+    $disableFuncMap = array_flip(explode(',', $disableFuncString));
 }
 // 遍历查看是否有禁用的函数
 foreach ($disableFuncMap ?? [] as $func) {

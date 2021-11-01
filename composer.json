@@ -17,7 +17,9 @@
     "mondagroup/heros-worker": "1.0.*"
   },
   "require-dev": {
-    "zircote/swagger-php": "^3.1"
+    "zircote/swagger-php": "^3.1",
+    "phpstan/phpstan": "1.0.0",
+    "friendsofphp/php-cs-fixer": "^2.19"
   },
   "suggest": {
     "ext-event": "For better performance. "
@@ -33,6 +35,7 @@
   },
   "scripts": {
     "cs-fix": "composer dump -o && php-cs-fixer fix $1",
-    "post-install-cmd": "script\\Installer::install"
+    "post-install-cmd": "script\\Installer::install",
+    "analyse": "./vendor/bin/phpstan analyse $1"
   }
 }
