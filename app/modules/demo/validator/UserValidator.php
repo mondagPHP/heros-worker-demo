@@ -5,33 +5,33 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\validator;
+namespace App\modules\demo\validator;
 
-use framework\validate\Validate;
+use Framework\Validate\Validate;
 
 /**
  * IndexAction 验证器
  * Class IndexLoginValidator
- * @package app\modules\demo\validator
+ * @package App\modules\demo\validator
  */
 class UserValidator extends Validate
 {
     //规则
-    protected $rule = [
+    protected array $rule = [
         'account' => 'require',
         'password' => 'require',
         'name' => 'require',
     ];
 
     //信息
-    protected $message = [
+    protected array $message = [
         'account.require' => '参数account缺少',
         'password.require' => '参数password缺少',
         'name.require' => '参数password缺少',
     ];
 
     //建议方法名称对应
-    protected $scene = [
+    protected array $scene = [
         'add' => ['account', 'password', 'name']
     ];
 }

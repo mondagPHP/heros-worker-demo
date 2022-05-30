@@ -7,3 +7,5 @@ CREATE TABLE `demo_user` (
      `updated_at` datetime DEFAULT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT into demo_user (id, `name`, `account`, `password`) values (1, 'admin', 'admin', '123456');

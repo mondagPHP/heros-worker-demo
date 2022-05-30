@@ -5,10 +5,10 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\entity\demo;
+namespace App\entity\demo;
 
 use Carbon\Carbon;
-use framework\database\HeroModel;
+use Framework\Database\HeroModel;
 
 /**
  * Class User

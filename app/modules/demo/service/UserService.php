@@ -5,31 +5,29 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\service;
+namespace App\modules\demo\service;
 
-use app\entity\demo\User;
-use app\modules\demo\dao\UserDao;
-use app\modules\demo\vo\UserAddVo;
-use app\modules\demo\vo\UserGetListVo;
-use framework\annotations\Resource;
-use framework\annotations\Service;
+use App\entity\demo\User;
+use App\modules\demo\vo\UserAddVo;
+use App\modules\demo\vo\UserGetListVo;
+use Framework\Annotation\Service;
 
 /**
  * Class UserService
- * @package app\modules\demo\service
+ * @package App\modules\demo\service
  * @Service
  */
+#[Service(IndexService::class)]
 class UserService
 {
-    /**
-     * @var UserDao $dao
-     * @Resource
-     */
-    private $dao;
 
     public function add(UserAddVo $vo)
     {
-        return $this->dao->add($vo);
+        return User::query()->create([
+            'name' => $vo->getName(),
+            'account' => $vo->getAccount(),
+            'password' => $vo->getPassword(),
+        ]);
     }
 
     /**
@@ -39,7 +37,9 @@ class UserService
     public function getList(UserGetListVo $vo): array
     {
         $data = [];
-        $list = $this->dao->getList($vo);
+        $list = User::query()
+            ->orderByDesc('created_at')
+            ->paginate($vo->getPageSize(), ['*'], 'page', $vo->getPage());
         /** @var User $user */
         foreach ($list->items() as $user) {
             $data[] = [

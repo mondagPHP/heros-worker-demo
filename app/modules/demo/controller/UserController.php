@@ -5,69 +5,55 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\Controller;
+namespace App\modules\demo\Controller;
 
-use app\modules\demo\middleware\AuthMiddleware;
-use app\modules\demo\service\UserService;
-use app\modules\demo\vo\UserAddVo;
-use app\modules\demo\vo\UserGetListVo;
-use framework\annotations\Controller;
-use framework\annotations\RequestMapping;
-use framework\annotations\Resource;
-use framework\core\AbstractController;
-use framework\util\Result;
+use App\modules\demo\middleware\AuthMiddleware;
+use App\modules\demo\service\UserService;
+use App\modules\demo\validator\UserValidator;
+use App\modules\demo\vo\UserAddVo;
+use App\modules\demo\vo\UserGetListVo;
+use Framework\Annotation\Controller;
+use Framework\Annotation\Inject;
+use Framework\Annotation\RequestMapping;
+use Framework\Annotation\Valid;
+use Framework\Util\Res;
 
 /**
  * Class UserController
- * @package app\modules\demo\Controller
- * @Controller(msg="")
+ * @package App\modules\demo\Controller
  */
-class UserController extends AbstractController
+#[Controller(UserController::class)]
+class UserController
 {
-    /**
-     * @var UserService $service
-     * @Resource
-     */
-    private $service;
 
-    public function _initialize()
-    {
-        $this->middleware(AuthMiddleware::class);
-    }
-
-    /**
-     * @return Result
-     * @RequestMapping(value="/app/modules/demo/Controller/UserController/test", method={"get"}, msg="test")
-     */
-    public function test(): Result
-    {
-        return Result::ok();
-    }
+    #[Inject]
+    private UserService $service;
 
     /**
      * 添加用户，
      * @param UserAddVo $vo
-     * @RequestMapping(value="/demo/user/add", method={"get", "post"}, msg="添加用户")
-     * @return Result
+     * @return Res
      */
-    public function add(UserAddVo $vo): Result
+    #[RequestMapping('/demo/user/add', '添加用户', ['POST'])]
+    #[Valid(UserValidator::class, 'add')]
+    public function add(UserAddVo $vo): Res
     {
         $user = $this->service->add($vo);
         if ($user) {
-            return Result::ok()->data($user->toArray());
+            return Res::ok()->data($user->toArray());
         }
-        return Result::error()->message('添加失败');
+        return Res::error()->message('添加失败');
     }
 
     /**
      * 获取用户列表
      * @param UserGetListVo $vo
-     * @return Result
-     * @RequestMapping(value="/demo/user/getList", method={"get"}, msg="获取用户列表")
+     * @return Res
      */
-    public function getList(UserGetListVo $vo): Result
+    #[RequestMapping('/demo/user/getList', '获取用户列表', ['GET'])]
+    public function getList(UserGetListVo $vo): Res
     {
         [$data, $total] = $this->service->getList($vo);
-        return Result::pager($vo->getPage(), $vo->getPageSize(), $total, $data);
+        return Res::pager($total, $data);
     }
 }

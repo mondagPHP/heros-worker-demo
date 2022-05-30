@@ -14,20 +14,20 @@
     }
   ],
   "require": {
-    "mondagroup/heros-worker": "1.0.*"
+    "mondagroup/heros-worker": "2.0.*"
   },
   "require-dev": {
     "zircote/swagger-php": "^3.1",
     "phpstan/phpstan": "1.0.0",
     "friendsofphp/php-cs-fixer": "^2.19",
-    "phpunit/phpunit": "^7.0"
+    "phpunit/phpunit": "^8.0"
   },
   "suggest": {
     "ext-event": "For better performance. "
   },
   "autoload": {
     "psr-4": {
-      "app\\": "app/",
+      "app\\": "App/",
       "script\\": "script/"
     },
     "files": [

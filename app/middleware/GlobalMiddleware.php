@@ -5,17 +5,17 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\middleware;
+namespace App\middleware;
 
-use framework\bootstrap\Log;
-use framework\http\Request;
+use Framework\Core\Log;
+use Framework\Http\HttpRequest;
 
 class GlobalMiddleware
 {
-    public function handle(Request $request, array $vars, array $extVars, \Closure $next)
+    public function process(HttpRequest $request, \Closure $next)
     {
         Log::info('GlobalMiddleware in');
-        $res = $next($request, $vars, $extVars);
+        $res = $next($request);
         Log::info('GlobalMiddleware out');
         return $res;
     }

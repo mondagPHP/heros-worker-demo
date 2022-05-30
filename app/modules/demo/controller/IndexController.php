@@ -5,45 +5,34 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\controller;
+namespace App\modules\demo\controller;
 
-use app\modules\demo\middleware\AuthMiddleware;
-use app\modules\demo\service\IndexService;
-use app\modules\demo\vo\LoginVo;
-use framework\annotations\Controller;
-use framework\annotations\RequestMapping;
-use framework\annotations\Resource;
-use framework\core\AbstractController;
-use framework\http\Request;
-use framework\http\Session;
-use framework\string\StringUtils;
-use framework\util\Result;
+use App\modules\demo\service\IndexService;
+use App\modules\demo\validator\IndexValidator;
+use App\modules\demo\vo\LoginVo;
+use Framework\Annotation\Controller;
+use Framework\Annotation\Inject;
+use Framework\Annotation\RequestMapping;
+use Framework\Annotation\Valid;
+use Framework\Http\HttpRequest;
+use Framework\Util\Res;
+use Monda\Utils\String\StringUtil;
 
 /**
  * Class IndexAction
- * @package app\modules\demo\action
- * @Controller(msg="IndexAction")
+ * @package App\modules\demo\action
  */
-class IndexController extends AbstractController
+#[Controller(IndexController::class)]
+class IndexController
 {
-    /**
-     * @var IndexService $service
-     * @Resource
-     */
-    private $service;
 
-    public function _initialize()
-    {
-        //doSomething init
-        //such as 配置一些局部中间件
-        //$this->middleware()
-        $this->middleware(AuthMiddleware::class, [], ['only' => 'logout']);
-    }
+    #[Inject]
+    protected IndexService $service;
 
     /**
      * 模板引擎
-     * @RequestMapping(value="/", method={"get"}, msg="test")
      */
+    #[RequestMapping('/', 'index', ['GET'])]
     public function index()
     {
         assign('title', 'heros-worker-demo');
@@ -51,52 +40,36 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @return Result
-     * @RequestMapping(value="/demo/index/test", method={"get"}, msg="test")
+     * @param HttpRequest $request
+     * @return Res
      */
-    public function test(Request $request): Result
+    #[RequestMapping('/demo/index/test', 'test', ['GET'])]
+    public function test(HttpRequest $request): Res
     {
-        return Result::ok();
+        return Res::ok();
     }
 
     /**
      * 通过服务获取用户信息
      * @param $id
-     * @return Result
-     * @RequestMapping(value="/demo/index/userInfo/{id:[0-9A-Z]+}", method={"get"}, msg="userInfo")
+     * @return Res
      */
-    public function userInfo($id): Result
+    #[RequestMapping('/demo/index/userInfo/{id:[0-9A-Z]+}', 'userInfo', ['GET'])]
+    public function userInfo($id): Res
     {
-        return Result::ok()->data($this->service->userInfo($id));
-    }
-
-    /**
-     * 登陆
-     * @param LoginVo $vo
-     * @param Session $session
-     * @return Result
-     * @RequestMapping(value="/demo/index/login", method={"post", "get"}, msg="login")
-     */
-    public function login(LoginVo $vo, Session $session): Result
-    {
-        $data = [
-            'account' => $vo->getAccount(),
-            'password' => $vo->getPassword(),
-        ];
-        $session->set('loginUser', StringUtils::jsonEncode($data));
-        return Result::ok()->data($data);
+        return Res::ok()->data($this->service->userInfo($id));
     }
 
     /**
      * 退出
-     * @param Session $session
-     * @return Result
+     * @param HttpRequest $request
+     * @return Res
      * @RequestMapping(value="/demo/index/logout", msg="logout")
      */
-    public function logout(Session $session): Result
+    public function logout(HttpRequest $request): Res
     {
+        $session = $request->session();
         $session->flush();
-        return Result::ok()->message('退出成功');
+        return Res::ok()->message('退出成功');
     }
 }

@@ -5,17 +5,17 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\vo;
+namespace App\modules\demo\vo;
 
-use framework\annotations\Validator;
-use framework\vo\RequestVoInterface;
+use Framework\Annotation\VO;
 
 /**
  * 登陆LoginVo
- * @package app\modules\demo\vo
- * @Validator(class="app\modules\demo\validator\IndexValidator", scene="login")
+ * @package App\modules\demo\vo
+ * @Validator(class="App\modules\demo\validator\IndexValidator", scene="login")
  */
-class LoginVo implements RequestVoInterface
+#[VO]
+class LoginVo
 {
     private $account;
     private $password;

@@ -5,11 +5,12 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\vo;
+namespace App\modules\demo\vo;
 
-use framework\vo\RequestVoInterface;
+use Framework\Annotation\VO;
 
-class UserGetListVo implements RequestVoInterface
+#[VO]
+class UserGetListVo
 {
     private $page = 1;
     private $pageSize = 20;
