@@ -5,17 +5,16 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\vo;
+namespace App\modules\demo\vo;
 
-use framework\annotations\Validator;
-use framework\vo\RequestVoInterface;
+use Framework\Annotation\VO;
 
 /**
  * Class addUserVo
- * @package app\modules\demo\vo
- * @Validator(class="app\modules\demo\validator\UserValidator", scene="add")
+ * @package App\modules\demo\vo
  */
-class UserAddVo implements RequestVoInterface
+#[VO]
+class UserAddVo
 {
     private $account;
     private $password;

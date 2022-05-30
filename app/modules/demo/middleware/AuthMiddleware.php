@@ -5,25 +5,23 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace app\modules\demo\middleware;
+namespace App\modules\demo\middleware;
 
-use app\exception\AuthException;
-use framework\http\Request;
+use App\Exception\AuthException;
+use Framework\Http\HttpRequest;
 
 /**
  * Class AuthMiddleware
- * @package app\modules\demo\middleware
+ * @package App\modules\demo\middleware
  */
 class AuthMiddleware
 {
     /**
-     * @param Request $request
-     * @param array $vars
-     * @param array $extVars
+     * @param HttpRequest $request
      * @param \Closure $next
      * @return mixed
      */
-    public function handle(Request $request, array $vars, array $extVars, \Closure $next)
+    public function process(HttpRequest $request, \Closure $next)
     {
         //验证登陆
         $session = $request->session();
@@ -31,6 +29,6 @@ class AuthMiddleware
         if (empty($data)) {
             throw new AuthException();
         }
-        return $next($request, $vars, $extVars);
+        return $next($request);
     }
 }

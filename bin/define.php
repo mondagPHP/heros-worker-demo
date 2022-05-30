@@ -6,8 +6,9 @@
  *
  */
 //项目根目录
-use Dotenv\Dotenv;
-use framework\core\Config;
+
+use Monda\Utils\Util\Config;
+use Monda\Utils\Util\Env;
 
 define('BASE_PATH', dirname(__DIR__));
 //心跳时间
@@ -22,10 +23,11 @@ if (isset($envFile['env'])) {
     $env = $envFile['env'];
 }
 define('ENV', $env);
+
 //加载配置文件
-Dotenv::create(BASE_PATH, "env_{$env}")->load();
-//加载配置文件文件
-Config::load(config_path(), []);
+$env = new Env(BASE_PATH . '/env_dev');
+Config::load(config_path());
+
 //应用基本配置
 $appConfig = \config('app');
 if (isset($appConfig['default_timezone'])) {

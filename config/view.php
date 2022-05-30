@@ -5,11 +5,12 @@
  * @contact  mondagroup_php@163.com
  *
  */
-use framework\view\driver\HeroTemplate;
+
+use Framework\View\HerosTemplate;
 
 return [
     //原生模板引擎
-    'handler' => HeroTemplate::class,
+    'handler' => HerosTemplate::class,
     // 模板缓存路径
     'cache_path' => runtime_path() . '/view/',
 
