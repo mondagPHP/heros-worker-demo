@@ -7,7 +7,6 @@
  */
 //项目根目录
 use Dotenv\Dotenv;
-use framework\aop\ClassLoader;
 use framework\core\Config;
 
 define('BASE_PATH', dirname(__DIR__));
@@ -32,7 +31,3 @@ $appConfig = \config('app');
 if (isset($appConfig['default_timezone'])) {
     date_default_timezone_set($appConfig['default_timezone']);
 }
-
-//aop
-ClassLoader::reload(\config('aop'));
-ClassLoader::init();
