@@ -5,14 +5,13 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\modules\demo\vo;
+namespace App\Modules\Demo\Vo;
 
 use Framework\Annotation\VO;
 
 /**
  * 登陆LoginVo
- * @package App\modules\demo\vo
- * @Validator(class="App\modules\demo\validator\IndexValidator", scene="login")
+ * @package App\Modules\Demo\Vo
  */
 #[VO]
 class LoginVo

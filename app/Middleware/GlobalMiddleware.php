@@ -5,7 +5,7 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\middleware;
+namespace App\Middleware;
 
 use Framework\Core\Log;
 use Framework\Http\HttpRequest;

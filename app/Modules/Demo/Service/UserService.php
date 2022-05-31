@@ -5,16 +5,16 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\modules\demo\service;
+namespace App\Modules\Demo\Service;
 
-use App\entity\demo\User;
-use App\modules\demo\vo\UserAddVo;
-use App\modules\demo\vo\UserGetListVo;
+use App\Entity\Demo\User;
+use App\Modules\Demo\Vo\UserAddVo;
+use App\Modules\Demo\Vo\UserGetListVo;
 use Framework\Annotation\Service;
 
 /**
  * Class UserService
- * @package App\modules\demo\service
+ * @package App\Modules\Demo\Service
  * @Service
  */
 #[Service(IndexService::class)]

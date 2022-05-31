@@ -7,11 +7,11 @@
  */
 namespace App\modules\demo\Controller;
 
-use App\modules\demo\middleware\AuthMiddleware;
-use App\modules\demo\service\UserService;
-use App\modules\demo\validator\UserValidator;
-use App\modules\demo\vo\UserAddVo;
-use App\modules\demo\vo\UserGetListVo;
+use App\Modules\Demo\Middleware\AuthMiddleware;
+use App\Modules\Demo\Service\UserService;
+use App\Modules\Demo\Validator\UserValidator;
+use App\Modules\Demo\Vo\UserAddVo;
+use App\Modules\Demo\Vo\UserGetListVo;
 use Framework\Annotation\Controller;
 use Framework\Annotation\Inject;
 use Framework\Annotation\RequestMapping;
@@ -19,11 +19,11 @@ use Framework\Annotation\Valid;
 use Framework\Util\Res;
 
 /**
- * Class UserController
- * @package App\modules\demo\Controller
+ * Class UserAction
+ * @package App\Modules\Demo\Action
  */
-#[Controller(UserController::class)]
-class UserController
+#[Controller(UserAction::class)]
+class UserAction
 {
 
     #[Inject]

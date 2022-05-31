@@ -5,7 +5,7 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\entity\demo;
+namespace App\Entity\Demo;
 
 use Carbon\Carbon;
 use Framework\Database\HeroModel;
