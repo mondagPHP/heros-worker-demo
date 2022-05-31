@@ -7,6 +7,12 @@
  */
 return [
     'global' => [
-        \app\middleware\GlobalMiddleware::class,
+        \App\middleware\GlobalMiddleware::class,
     ],
+    '/demo/index/*' => [
+        \App\modules\demo\middleware\AuthMiddleware::class,
+    ],
+    '/demo/user/*' => [
+        \App\modules\demo\middleware\AuthMiddleware::class,
+    ]
 ];
