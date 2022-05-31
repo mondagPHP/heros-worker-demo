@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\modules\demo\Controller;
+namespace App\Modules\Demo\Action;
 
 
-use App\modules\demo\validator\IndexValidator;
-use App\modules\demo\vo\LoginVo;
+use App\Modules\Demo\Validator\IndexValidator;
+use App\Modules\Demo\Vo\LoginVo;
 use Framework\Annotation\Controller;
 use Framework\Annotation\RequestMapping;
 use Framework\Annotation\Valid;
@@ -13,8 +13,8 @@ use Framework\Http\HttpRequest;
 use Framework\Util\Res;
 use Monda\Utils\String\StringUtil;
 
-#[Controller(LoginController::class)]
-class LoginController {
+#[Controller(LoginActoin::class)]
+class LoginActoin {
 
     /**
      * 登陆

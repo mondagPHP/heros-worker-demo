@@ -5,13 +5,13 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\modules\demo\service;
+namespace App\Modules\Demo\Service;
 
 use Framework\Annotation\Service;
 
 /**
  * Class IndexService
- * @package App\modules\demo\service
+ * @package App\Modules\Demo\Service
  */
 #[Service(IndexService::class)]
 class IndexService

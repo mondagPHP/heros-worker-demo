@@ -5,14 +5,14 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\modules\demo\validator;
+namespace App\Modules\Demo\Validator;
 
 use Framework\Validate\Validate;
 
 /**
  * IndexAction 验证器
  * Class IndexLoginValidator
- * @package App\modules\demo\validator
+ * @package App\Modules\Demo\Validator
  */
 class IndexValidator extends Validate
 {

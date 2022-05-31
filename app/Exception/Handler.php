@@ -9,7 +9,6 @@ namespace App\Exception;
 
 use Framework\Core\ExceptionHandler;
 use Framework\Http\HttpRequest;
-use Framework\Http\HttpResponse;
 use Throwable;
 
 /**

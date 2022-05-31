@@ -5,25 +5,21 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\modules\demo\controller;
+namespace App\Modules\Demo\Action;
 
-use App\modules\demo\service\IndexService;
-use App\modules\demo\validator\IndexValidator;
-use App\modules\demo\vo\LoginVo;
+use App\Modules\Demo\Service\IndexService;
 use Framework\Annotation\Controller;
 use Framework\Annotation\Inject;
 use Framework\Annotation\RequestMapping;
-use Framework\Annotation\Valid;
 use Framework\Http\HttpRequest;
 use Framework\Util\Res;
-use Monda\Utils\String\StringUtil;
 
 /**
  * Class IndexAction
- * @package App\modules\demo\action
+ * @package App\Modules\Demo\Action
  */
-#[Controller(IndexController::class)]
-class IndexController
+#[Controller(IndexAction::class)]
+class IndexAction
 {
 
     #[Inject]

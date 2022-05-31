@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+
+require_once(__DIR__ . '/bin/define.php');
+
+//启动
+$bootStrapFiles = config('bootstrap');
+foreach ($bootStrapFiles as $className) {
+    // @var Bootstrap $className
+    $className::start(null);
+}
+
+try {
+    $command = new \Framework\Console\Command();
+    $command->installInternalCommands();
+    $command->installCommands(app_path() . '/Command');
+    $command->run();
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+    echo '----------------trace:-----------------------' . PHP_EOL;
+    var_dump($e->getTraceAsString());
+}

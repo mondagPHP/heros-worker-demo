@@ -5,13 +5,13 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\modules\demo\vo;
+namespace App\Modules\Demo\Vo;
 
 use Framework\Annotation\VO;
 
 /**
  * Class addUserVo
- * @package App\modules\demo\vo
+ * @package App\Modules\Demo\Vo
  */
 #[VO]
 class UserAddVo

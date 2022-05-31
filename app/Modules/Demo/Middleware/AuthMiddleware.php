@@ -5,14 +5,14 @@
  * @contact  mondagroup_php@163.com
  *
  */
-namespace App\modules\demo\middleware;
+namespace App\Modules\Demo\Middleware;
 
 use App\Exception\AuthException;
 use Framework\Http\HttpRequest;
 
 /**
  * Class AuthMiddleware
- * @package App\modules\demo\middleware
+ * @package App\Modules\Demo\Middleware
  */
 class AuthMiddleware
 {
