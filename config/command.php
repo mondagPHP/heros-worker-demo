@@ -5,9 +5,7 @@
  * @contact  mondagroup_php@163.com
  *
  */
-use app\command\AnalyseCommand;
 
 return [
     \app\command\TestCommand::class,
-    AnalyseCommand::class,
 ];
