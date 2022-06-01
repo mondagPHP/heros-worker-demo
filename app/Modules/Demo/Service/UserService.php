@@ -39,7 +39,7 @@ class UserService
         $data = [];
         $list = User::query()
             ->orderByDesc('created_at')
-            ->paginate($vo->getPageSize(), ['*'], 'page', $vo->getPage());
+            ->paginate($vo->getPageSize());
         /** @var User $user */
         foreach ($list->items() as $user) {
             $data[] = [
