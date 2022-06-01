@@ -13,8 +13,8 @@ use Framework\Http\HttpRequest;
 use Framework\Util\Res;
 use Monda\Utils\String\StringUtil;
 
-#[Controller(LoginActoin::class)]
-class LoginActoin {
+#[Controller(LoginAction::class)]
+class LoginAction {
 
     /**
      * 登陆
