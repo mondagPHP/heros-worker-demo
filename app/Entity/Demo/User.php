@@ -1,33 +1,22 @@
 <?php
-/**
- * This file is part of monda-worker.
- *
- * @contact  mondagroup_php@163.com
- *
- */
+
+declare (strict_types=1);
 namespace App\Entity\Demo;
 
 use Carbon\Carbon;
 use Framework\Database\HeroModel;
-
 /**
  * Class User
- * @property int $id
- * @property string $name
- * @property string $account
- * @property string $password
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property int $id 
+ * @property string $name 姓名
+ * @property string $account 账户
+ * @property string $password 密码
+ * @property Carbon $created_at 
+ * @property Carbon $updated_at 
  */
 class User extends HeroModel
 {
     protected $table = 'demo_user';
     /** @var array $fillable */
-    protected $fillable = [
-        //Format each item with a new line
-        'id',
-        'name',
-        'account',
-        'password',
-    ];
+    protected $fillable = ['id', 'name', 'account', 'password'];
 }
