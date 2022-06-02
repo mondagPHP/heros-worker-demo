@@ -1,4 +1,4 @@
-{
+ {
   "name": "mondagroup/heros-worker-demo",
   "type": "project",
   "keywords": [
@@ -27,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "app\\": "App/",
+      "App\\": "app/",
       "script\\": "script/"
     },
     "files": [
