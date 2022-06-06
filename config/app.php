@@ -14,4 +14,7 @@ return [
     //扫描地址
     'scan_dir' => BASE_PATH . '/app',
     'scan_root_namespace' => 'App\\',
+
+    //定时任务异步处理worker
+    'async_worker' => 'tcp://127.0.0.1:8182'
 ];
